@@ -1,0 +1,419 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lumen — Pilates Studio, Turin</title>
+<meta name="description" content="Reformer and mat Pilates in small groups. Demo website designed and built by Alberto Gagliardi.">
+<meta property="og:title" content="Lumen — Pilates Studio">
+<meta property="og:image" content="https://images.unsplash.com/photo-1717500251997-80b234166d00?auto=format&fit=crop&w=1200&q=80">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://images.unsplash.com">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lenis@1.3.26/dist/lenis.css">
+<style>
+:root{
+ --paper:#f3eee7;--paper2:#ebe4d9;--ink:#1c1916;--ink2:#4a443d;--mute:#8b8278;
+ --clay:#b8673f;--clay2:#d9a17f;--line:rgba(28,25,22,.14);
+ --serif:"Instrument Serif",Georgia,serif;--sans:"Inter Tight",system-ui,sans-serif;
+ --ease:cubic-bezier(.22,1,.36,1);--pad:clamp(20px,4vw,56px)}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{background:var(--paper);color:var(--ink);font:400 17px/1.55 var(--sans);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img{display:block;width:100%;height:100%;object-fit:cover}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+::selection{background:var(--clay);color:var(--paper)}
+.eyebrow{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--mute)}
+/* grain */
+body::after{content:"";position:fixed;inset:-50%;pointer-events:none;z-index:90;opacity:.06;
+ background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");animation:grain 1.2s steps(6) infinite}
+@keyframes grain{0%{transform:translate(0,0)}25%{transform:translate(-3%,2%)}50%{transform:translate(2%,-3%)}75%{transform:translate(-2%,-1%)}100%{transform:translate(1%,3%)}}
+
+.ribbon{position:fixed;left:16px;bottom:16px;z-index:80;background:rgba(28,25,22,.86);color:#efe7dc;font-size:12px;padding:8px 14px;border-radius:99px;backdrop-filter:blur(8px);white-space:nowrap}
+
+/* loader */
+.loader{position:fixed;inset:0;z-index:100;background:var(--ink);color:var(--paper);display:flex;align-items:flex-end;justify-content:space-between;padding:var(--pad)}
+.loader .word{font-family:var(--serif);font-size:clamp(64px,12vw,180px);line-height:.9;overflow:hidden}
+.loader .word span{display:inline-block}
+.loader .pct{font-size:14px;letter-spacing:.1em;font-variant-numeric:tabular-nums}
+.no-js .loader,.reduced .loader{display:none}
+
+/* nav */
+.nav{position:fixed;top:0;left:0;right:0;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:22px var(--pad);transition:transform .6s var(--ease),background .4s}
+.nav.hide{transform:translateY(-110%)}
+.nav.solid{background:rgba(243,238,231,.82);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.logo{font-family:var(--serif);font-size:30px;line-height:1}
+.logo i{color:var(--clay)}
+.menu{display:flex;gap:34px;font-size:14px}
+.menu a{position:relative}
+.menu a::after{content:"";position:absolute;left:0;bottom:-3px;height:1px;width:100%;background:currentColor;transform:scaleX(0);transform-origin:right;transition:transform .5s var(--ease)}
+.menu a:hover::after{transform:scaleX(1);transform-origin:left}
+.pill{display:inline-flex;align-items:center;gap:10px;padding:13px 22px;border-radius:99px;background:var(--ink);color:var(--paper);font-size:14px;font-weight:500;position:relative;overflow:hidden;isolation:isolate}
+.pill::before{content:"";position:absolute;inset:0;background:var(--clay);transform:translateY(101%);border-radius:inherit;transition:transform .55s var(--ease);z-index:-1}
+.pill:hover::before{transform:translateY(0)}
+.pill .dot{width:6px;height:6px;border-radius:50%;background:var(--clay2)}
+.burger{display:none;width:44px;height:44px;border-radius:50%;box-shadow:inset 0 0 0 1px var(--line)}
+.burger span{display:block;width:18px;height:1.5px;background:var(--ink);margin:4px auto}
+
+/* hero */
+.hero{min-height:100svh;padding:120px var(--pad) 40px;display:grid;grid-template-columns:1.25fr 1fr;grid-template-rows:1fr auto;gap:28px 48px}
+.hero{position:relative}
+.hero h1{font-family:var(--serif);font-weight:400;font-size:clamp(68px,11.5vw,210px);line-height:.86;letter-spacing:-.035em}
+.hero h1 em{color:var(--clay)}
+.hero .line{display:block;padding-bottom:.04em}
+.hero .media{grid-row:1/3;grid-column:2;border-radius:999px 999px 18px 18px;overflow:hidden;position:relative;min-height:62vh;align-self:end;clip-path:inset(0% 0% 0% 0%)}
+.hero .left{display:flex;flex-direction:column;justify-content:space-between;gap:40px}
+.hero .meta{display:flex;gap:40px;font-size:13px;color:var(--ink2);line-height:1.5}
+.hero .meta b{display:block;font-weight:500;color:var(--ink)}
+.badge{position:absolute;right:calc(var(--pad) + 36%);top:46%;width:132px;height:132px;z-index:2;display:grid;place-items:center}
+.badge svg{position:absolute;inset:0;animation:spin 16s linear infinite}
+.badge span{width:58px;height:58px;border-radius:50%;background:var(--clay);color:var(--paper);display:grid;place-items:center;font-size:22px;transition:transform .5s var(--ease)}
+.badge:hover span{transform:rotate(-45deg) scale(1.08)}
+@keyframes spin{to{transform:rotate(360deg)}}
+.hero .media img{position:absolute;inset:0;transform:scale(1.15);transform-origin:center 70%}
+.hero .media .tag{position:absolute;left:18px;bottom:18px;background:rgba(243,238,231,.9);backdrop-filter:blur(8px);padding:12px 16px;border-radius:14px;font-size:13px;line-height:1.35}
+.hero .media .tag b{display:block;font-weight:600}
+.live{display:inline-block;width:7px;height:7px;border-radius:50%;background:#5a9a62;margin-right:6px;animation:pulse 2s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(90,154,98,.6)}70%,100%{box-shadow:0 0 0 8px rgba(90,154,98,0)}}
+.hero .bottom{display:flex;justify-content:space-between;align-items:flex-end;gap:30px;flex-wrap:wrap}
+.hero .bottom p{max-width:360px;color:var(--ink2);font-size:18px}
+.scrollcue{display:flex;align-items:center;gap:12px;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--mute)}
+.scrollcue i{width:1px;height:46px;background:var(--line);position:relative;overflow:hidden}
+.scrollcue i::after{content:"";position:absolute;left:0;top:-50%;width:1px;height:50%;background:var(--ink);animation:cue 1.8s var(--ease) infinite}
+@keyframes cue{to{top:100%}}
+
+/* marquee */
+.marquee{border-top:1px solid var(--line);border-bottom:1px solid var(--line);overflow:hidden;padding:22px 0;white-space:nowrap}
+.marquee .track{display:inline-flex;gap:48px;font-family:var(--serif);font-size:clamp(36px,5vw,72px);line-height:1}
+.marquee .track span{display:inline-flex;align-items:center;gap:48px}
+.marquee .track span::after{content:"✳";font-size:.45em;color:var(--clay)}
+
+/* statement */
+.statement{padding:clamp(100px,16vw,220px) var(--pad);display:grid;grid-template-columns:1fr 3fr;gap:40px}
+.statement p{font-family:var(--serif);font-size:clamp(32px,4.4vw,68px);line-height:1.08;letter-spacing:-.015em}
+.js .statement .word{opacity:.16}
+
+/* classes */
+.classes{position:relative;overflow:hidden}
+.classes .head{display:flex;justify-content:space-between;align-items:flex-end;padding:0 var(--pad) 40px;gap:20px;flex-wrap:wrap}
+.h2{font-family:var(--serif);font-weight:400;font-size:clamp(48px,7vw,112px);line-height:.92;letter-spacing:-.03em}
+.h2 em{color:var(--clay)}
+.rail{display:flex;gap:28px;padding:0 var(--pad) 90px;width:max-content}
+.card{width:min(440px,78vw);flex:none}
+.card .ph{aspect-ratio:4/5;border-radius:18px;overflow:hidden;position:relative}
+.card .ph img{transition:transform 1.2s var(--ease)}
+.card:hover .ph img{transform:scale(1.06)}
+.card .n{position:absolute;top:16px;left:18px;color:#fff;font-size:13px;letter-spacing:.12em;mix-blend-mode:difference}
+.card h3{font-family:var(--serif);font-weight:400;font-size:40px;margin:22px 0 6px;line-height:1}
+.card .meta{display:flex;gap:10px;margin-bottom:10px}
+.chip{font-size:12px;padding:5px 11px;border-radius:99px;box-shadow:inset 0 0 0 1px var(--line);color:var(--ink2)}
+.card p{color:var(--ink2);max-width:380px}
+
+/* numbers */
+.numbers{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.numbers div{padding:46px var(--pad);border-right:1px solid var(--line)}
+.numbers div:last-child{border-right:0}
+.numbers b{display:block;font-family:var(--serif);font-weight:400;font-size:clamp(56px,6vw,96px);line-height:1;font-variant-numeric:tabular-nums}
+.numbers span{color:var(--mute);font-size:14px}
+
+/* schedule */
+.schedule{padding:clamp(90px,12vw,160px) var(--pad)}
+.schedule .top{display:flex;justify-content:space-between;align-items:flex-end;gap:30px;flex-wrap:wrap;margin-bottom:46px}
+.days{display:flex;gap:6px;flex-wrap:wrap}
+.days button{padding:10px 18px;border-radius:99px;font-size:14px;box-shadow:inset 0 0 0 1px var(--line);transition:background .3s,color .3s}
+.days button[aria-selected=true]{background:var(--ink);color:var(--paper);box-shadow:none}
+.slot{display:grid;grid-template-columns:120px 1.4fr 1fr 160px 120px;align-items:center;gap:20px;padding:24px 0;border-top:1px solid var(--line)}
+.slot:last-child{border-bottom:1px solid var(--line)}
+.slot time{font-family:var(--serif);font-size:34px;line-height:1}
+.slot .cls{font-size:20px;font-weight:500}
+.slot .who{color:var(--mute)}
+.spots{font-size:13px;display:flex;align-items:center;gap:8px}
+.bar{flex:1;height:3px;background:var(--line);border-radius:3px;overflow:hidden;max-width:80px}
+.bar i{display:block;height:100%;background:var(--ink)}
+.full .bar i{background:var(--clay)}
+.slot a{justify-self:end;font-size:14px;border-bottom:1px solid currentColor;padding-bottom:2px}
+
+/* pricing */
+.pricing{background:var(--ink);color:var(--paper);padding:clamp(90px,12vw,160px) var(--pad);border-radius:28px 28px 0 0}
+.pricing .eyebrow{color:#a99f93}
+.plans{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:56px}
+.plan{border:1px solid rgba(243,238,231,.16);border-radius:22px;padding:34px;display:flex;flex-direction:column;min-height:440px;transition:border-color .4s,transform .6s var(--ease)}
+.plan:hover{border-color:rgba(243,238,231,.45);transform:translateY(-6px)}
+.plan.hot{background:var(--paper);color:var(--ink)}
+.plan .name{font-size:14px;letter-spacing:.14em;text-transform:uppercase;opacity:.7}
+.plan .price{font-family:var(--serif);font-size:88px;line-height:1;margin:26px 0 4px}
+.plan .price small{font-family:var(--sans);font-size:15px;opacity:.6}
+.plan ul{list-style:none;margin:26px 0 30px;flex:1}
+.plan li{padding:11px 0;border-top:1px solid rgba(243,238,231,.14);font-size:15px}
+.plan.hot li{border-color:var(--line)}
+.plan .pill{justify-content:center}
+.plan:not(.hot) .pill{background:var(--paper);color:var(--ink)}
+.plan:not(.hot) .pill:hover{color:var(--paper)}
+
+/* quote */
+.quote{display:grid;grid-template-columns:1fr 1.3fr;min-height:90vh;background:var(--ink)}
+.quote .ph{overflow:hidden}
+.quote .ph img{height:120%;transform:translateY(-8%)}
+.quote .txt{padding:clamp(50px,8vw,120px) var(--pad);color:var(--paper);display:flex;flex-direction:column;justify-content:center;gap:34px;background:var(--clay)}
+.quote blockquote{font-family:var(--serif);font-size:clamp(34px,4vw,62px);line-height:1.06;letter-spacing:-.015em}
+.quote cite{font-style:normal;font-size:14px;letter-spacing:.08em}
+
+/* contact */
+.contact{padding:clamp(90px,12vw,160px) var(--pad);display:grid;grid-template-columns:1fr 1fr;gap:clamp(40px,7vw,120px)}
+.contact .info{display:flex;flex-direction:column;gap:26px}
+.contact dl{display:grid;grid-template-columns:110px 1fr;gap:14px 20px;font-size:15px;margin-top:20px}
+.contact dt{color:var(--mute)}
+form{display:grid;gap:26px;align-content:start}
+.field{position:relative}
+.field input,.field select,.field textarea{width:100%;background:transparent;border:0;border-bottom:1px solid var(--line);padding:26px 0 12px;font:400 18px var(--sans);color:var(--ink);border-radius:0;outline:none;transition:border-color .3s;-webkit-appearance:none;appearance:none}
+.field textarea{resize:vertical;min-height:90px}
+.field label{position:absolute;left:0;top:26px;color:var(--mute);pointer-events:none;transition:transform .4s var(--ease),font-size .4s var(--ease);transform-origin:left}
+.field input:focus,.field textarea:focus,.field select:focus{border-color:var(--ink)}
+.field input:focus+label,.field input:not(:placeholder-shown)+label,.field textarea:focus+label,.field textarea:not(:placeholder-shown)+label,.field select+label{transform:translateY(-22px);font-size:12px;letter-spacing:.08em;text-transform:uppercase}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:26px}
+.consent{display:flex;gap:12px;font-size:14px;color:var(--ink2);align-items:flex-start}
+.consent input{margin-top:3px;accent-color:var(--clay);width:16px;height:16px;flex:none}
+.sent{display:none;padding:22px;border-radius:16px;background:var(--paper2);font-size:15px}
+.sent.on{display:block}
+
+/* footer */
+footer{background:var(--ink);color:var(--paper);padding:70px var(--pad) 90px;overflow:hidden}
+footer .grid{display:flex;justify-content:space-between;gap:30px;flex-wrap:wrap;font-size:14px;color:#b7ada1;margin-bottom:40px}
+footer .giant{font-family:var(--serif);font-size:clamp(120px,34vw,640px);line-height:.75;letter-spacing:-.05em;white-space:nowrap}
+footer .giant i{color:var(--clay)}
+
+/* cursor */
+.cursor{position:fixed;left:0;top:0;width:10px;height:10px;margin:-5px 0 0 -5px;border-radius:50%;background:#fff;pointer-events:none;z-index:95;mix-blend-mode:difference;transition:width .35s var(--ease),height .35s var(--ease),margin .35s var(--ease);display:none}
+.cursor.big{width:64px;height:64px;margin:-32px 0 0 -32px}
+@media (hover:hover) and (pointer:fine){.js .cursor{display:block}}
+
+@media (max-width:900px){
+ .ribbon{right:16px;white-space:normal;text-align:center;font-size:11px;border-radius:14px}
+ .menu,.nav .pill{display:none}.burger{display:block}
+ .menu.open{display:flex;position:fixed;inset:0;background:var(--paper);flex-direction:column;justify-content:center;padding:var(--pad);gap:18px;font-family:var(--serif);font-size:52px;z-index:-1}
+ .hero{grid-template-columns:1fr;grid-template-rows:auto;padding-top:110px}
+ .hero .media{grid-row:auto;grid-column:auto;min-height:0;aspect-ratio:4/5}
+ .badge{display:none}
+ .statement,.contact,.quote{grid-template-columns:1fr}
+ .quote .ph{height:60vh}
+ .numbers{grid-template-columns:1fr 1fr}.numbers div:nth-child(2){border-right:0}.numbers div:nth-child(-n+2){border-bottom:1px solid var(--line)}
+ .plans{grid-template-columns:1fr}.plan{min-height:0}
+ .slot{grid-template-columns:80px 1fr;row-gap:6px}.slot time{font-size:28px}.slot .who,.slot .spots,.slot a{grid-column:2}.slot a{justify-self:start}
+ .row2{grid-template-columns:1fr}
+ .rail{flex-direction:column;width:auto;padding-bottom:60px}.card{width:100%}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body class="no-js">
+<script>document.body.classList.replace('no-js','js');if(matchMedia('(prefers-reduced-motion: reduce)').matches)document.body.classList.add('reduced')</script>
+
+<div class="loader" aria-hidden="true"><div class="word"><span>Lumen</span></div><div class="pct"><span id="pct">0</span>%</div></div>
+<div class="cursor" aria-hidden="true"></div>
+<div class="ribbon">Demo site · fictional studio · design &amp; code by Alberto Gagliardi</div>
+
+<header class="nav" id="nav">
+ <a href="#top" class="logo">Lumen<i>.</i></a>
+ <nav class="menu" id="menu"><a href="#classes">Classes</a><a href="#schedule">Schedule</a><a href="#pricing">Membership</a><a href="#contact">Visit</a></nav>
+ <a href="#contact" class="pill" data-magnetic><span class="dot"></span>Book a free class</a>
+ <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false"><span></span><span></span></button>
+</header>
+
+<main id="top">
+<section class="hero">
+ <div class="left">
+  <div class="meta fade"><div><b>Pilates studio</b>Turin, since 2019</div><div><b>Reformer · Mat · Tower</b>Groups of eight</div></div>
+  <h1 id="heroTitle"><span class="line">Strength,</span><span class="line"><em>softly</em> built.</span></h1>
+ </div>
+ <a href="#contact" class="badge" aria-label="Book your free class"><svg viewBox="0 0 132 132" aria-hidden="true"><defs><path id="c" d="M66,66 m-52,0 a52,52 0 1,1 104,0 a52,52 0 1,1 -104,0"/></defs><text font-size="11.5" letter-spacing="3.2" fill="#1c1916" font-family="Inter Tight,sans-serif"><textPath href="#c">BOOK YOUR FREE CLASS ✳ BOOK YOUR FREE CLASS ✳ </textPath></text></svg><span>↗</span></a>
+ <div class="media" id="heroMedia">
+  <img src="https://images.unsplash.com/photo-1717500251997-80b234166d00?auto=format&fit=crop&w=1400&q=80" alt="Bright Pilates studio with reformers and plants" fetchpriority="high">
+  <div class="tag"><span class="live"></span><b>Next class 18:30</b>Reformer Flow · 2 spots left</div>
+ </div>
+ <div class="bottom">
+  <p class="fade">Reformer &amp; mat Pilates in groups of eight, in a sunlit studio in the heart of Turin. Your first class is on us.</p>
+  <div class="scrollcue fade"><i></i>Scroll</div>
+ </div>
+</section>
+
+<div class="marquee" aria-hidden="true"><div class="track" id="track">
+ <span>Reformer</span><span>Mat Flow</span><span>Tower</span><span>Prenatal</span><span>Private sessions</span><span>Mobility</span>
+ <span>Reformer</span><span>Mat Flow</span><span>Tower</span><span>Prenatal</span><span>Private sessions</span><span>Mobility</span>
+</div></div>
+
+<section class="statement">
+ <span class="eyebrow">(01) — The studio</span>
+ <p id="statement">We believe movement should feel like a conversation, not a punishment. Small groups, teachers who know your name, and a room full of light: that's how strength becomes a habit.</p>
+</section>
+
+<section class="classes" id="classes">
+ <div class="head"><h2 class="h2">Find your <em>class</em></h2><span class="eyebrow">(02) — Four formats</span></div>
+ <div class="rail" id="rail">
+  <article class="card"><div class="ph"><img loading="lazy" src="https://images.unsplash.com/photo-1717500251825-b397c67692a3?auto=format&fit=crop&w=900&q=80" alt="Woman exercising on a reformer"><span class="n">01</span></div><h3>Reformer Flow</h3><div class="meta"><span class="chip">55 min</span><span class="chip">All levels</span></div><p>Spring resistance for long, strong muscles. Low impact, always guided.</p></article>
+  <article class="card"><div class="ph"><img loading="lazy" src="https://images.unsplash.com/photo-1717500251741-cdbc93342d5a?auto=format&fit=crop&w=900&q=80" alt="Side stretch on the reformer"><span class="n">02</span></div><h3>Mat Foundations</h3><div class="meta"><span class="chip">50 min</span><span class="chip">Beginners</span></div><p>Breath, posture and core control: the best place to start.</p></article>
+  <article class="card"><div class="ph"><img loading="lazy" src="https://images.unsplash.com/photo-1717500250576-5ffefc5cfb93?auto=format&fit=crop&w=900&q=80" alt="Inversion on the Pilates tower"><span class="n">03</span></div><h3>Tower Power</h3><div class="meta"><span class="chip">45 min</span><span class="chip">Intermediate</span></div><p>Cadillac and tower work for strength, control and a little thrill.</p></article>
+  <article class="card"><div class="ph"><img loading="lazy" src="https://images.unsplash.com/photo-1717500251833-d807c5753ded?auto=format&fit=crop&w=900&q=80" alt="Seated stretch on the reformer"><span class="n">04</span></div><h3>Private Session</h3><div class="meta"><span class="chip">55 min</span><span class="chip">1:1</span></div><p>A program built around your body, your goals and your history.</p></article>
+ </div>
+</section>
+
+<section class="numbers" aria-label="Studio in numbers">
+ <div><b data-count="8">8</b><span>people max per class</span></div>
+ <div><b data-count="21">21</b><span>classes every week</span></div>
+ <div><b data-count="4">4</b><span>certified teachers</span></div>
+ <div><b data-count="96" data-suffix="%">96%</b><span>members who renew</span></div>
+</section>
+
+<section class="schedule" id="schedule">
+ <div class="top"><h2 class="h2">This <em>week</em></h2><div class="days" role="tablist" id="days"></div></div>
+ <div id="slots" aria-live="polite"></div>
+</section>
+
+<section class="pricing" id="pricing">
+ <span class="eyebrow">(03) — Membership</span>
+ <h2 class="h2" style="margin-top:18px">Simple, <em style="color:var(--clay2)">honest</em> pricing.</h2>
+ <div class="plans">
+  <div class="plan"><span class="name">Drop-in</span><div class="price">€22<small> / class</small></div><ul><li>Any group class</li><li>Mats &amp; props included</li><li>Book 7 days ahead</li></ul><a href="#contact" class="pill">Choose drop-in</a></div>
+  <div class="plan hot"><span class="name">Eight a month</span><div class="price">€149<small> / month</small></div><ul><li>Twice a week, real progress</li><li>Priority booking</li><li>One guest pass a month</li><li>Pause any time</li></ul><a href="#contact" class="pill"><span class="dot"></span>Most chosen</a></div>
+  <div class="plan"><span class="name">Unlimited</span><div class="price">€199<small> / month</small></div><ul><li>Unlimited classes</li><li>Monthly posture check</li><li>10% off private sessions</li></ul><a href="#contact" class="pill">Go unlimited</a></div>
+ </div>
+</section>
+
+<section class="quote">
+ <div class="ph"><img loading="lazy" src="https://images.unsplash.com/photo-1717500252642-ab69af027833?auto=format&fit=crop&w=1200&q=80" alt="Member training on the reformer" data-parallax></div>
+ <div class="txt"><span class="eyebrow" style="color:#f6dccb">(04) — Members</span><blockquote>“Three months in, my back pain is gone. They watch every detail, and it never feels like a gym.”</blockquote><cite>SARA M. — REFORMER FLOW · SAMPLE REVIEW</cite></div>
+</section>
+
+<section class="contact" id="contact">
+ <div class="info">
+  <span class="eyebrow">(05) — Visit us</span>
+  <h2 class="h2">Your first class is <em>on us.</em></h2>
+  <p style="color:var(--ink2);max-width:420px">Leave your details and we'll call you within one working day to book your free trial.</p>
+  <dl><dt>Address</dt><dd>Via Esempio 12, Turin (demo)</dd><dt>Hours</dt><dd>Mon–Fri 7:00–21:00<br>Sat 9:00–13:00</dd><dt>Email</dt><dd>hello@lumen-demo.com</dd></dl>
+ </div>
+ <form id="form" novalidate>
+  <div class="row2">
+   <div class="field"><input id="fn" placeholder=" " autocomplete="name" required><label for="fn">Name</label></div>
+   <div class="field"><input id="fe" type="email" placeholder=" " autocomplete="email" required><label for="fe">Email</label></div>
+  </div>
+  <div class="row2">
+   <div class="field"><input id="fp" type="tel" placeholder=" " autocomplete="tel"><label for="fp">Phone</label></div>
+   <div class="field"><select id="fc"><option>Reformer Flow</option><option>Mat Foundations</option><option>Tower Power</option><option>Private Session</option><option>Not sure yet</option></select><label for="fc">Class</label></div>
+  </div>
+  <div class="field"><textarea id="fm" placeholder=" " rows="3"></textarea><label for="fm">Anything we should know?</label></div>
+  <label class="consent"><input type="checkbox" id="fok"> I agree to be contacted about my trial and accept the privacy policy.</label>
+  <div><button class="pill" type="submit" data-magnetic><span class="dot"></span>Request my free class</button></div>
+  <div class="sent" id="sent" role="status"></div>
+ </form>
+</section>
+</main>
+
+<footer>
+ <div class="grid"><span>© Lumen Pilates (fictional) · Turin</span><span>Instagram · Newsletter · Privacy</span><span>Design &amp; code: Alberto Gagliardi</span></div>
+ <div class="giant">Lumen<i>.</i></div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/SplitText.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.3.26/dist/lenis.min.js"></script>
+<script>
+const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+/* ---------- schedule (works without animations) ---------- */
+const PLAN={Mon:[["07:30","Mat Foundations","Giulia",5],["12:30","Reformer Flow","Anna",2],["18:30","Tower Power","Luca",1]],
+ Tue:[["08:00","Reformer Flow","Anna",4],["13:00","Private Session","Elena",1],["19:00","Mat Foundations","Giulia",6]],
+ Wed:[["07:30","Tower Power","Luca",3],["12:30","Reformer Flow","Elena",2],["18:30","Reformer Flow","Anna",0]],
+ Thu:[["08:00","Mat Foundations","Giulia",7],["19:00","Tower Power","Luca",2]],
+ Fri:[["07:30","Reformer Flow","Elena",3],["18:00","Mat Foundations","Giulia",5]],
+ Sat:[["09:30","Reformer Flow","Anna",1],["11:00","Mat Foundations","Elena",4]]};
+const days=document.getElementById('days'),slots=document.getElementById('slots');
+function showDay(d,animate){
+ [...days.children].forEach(b=>b.setAttribute('aria-selected',b.dataset.d===d));
+ slots.innerHTML=PLAN[d].map(([t,c,w,n])=>`<div class="slot${n?'':' full'}"><time>${t}</time><span class="cls">${c}</span><span class="who">with ${w}</span><span class="spots"><span class="bar"><i style="width:${(8-n)/8*100}%"></i></span>${n?n+' left':'Waitlist'}</span><a href="#contact">${n?'Book':'Join list'}</a></div>`).join('');
+ if(animate&&window.gsap&&!reduced)gsap.from('#slots .slot',{y:24,opacity:0,duration:.7,stagger:.06,ease:'power3.out'});
+}
+Object.keys(PLAN).forEach(d=>{const b=document.createElement('button');b.textContent=d;b.dataset.d=d;b.setAttribute('role','tab');b.onclick=()=>showDay(d,true);days.appendChild(b)});
+showDay(['Mon','Mon','Tue','Wed','Thu','Fri','Sat'][new Date().getDay()],false);
+
+/* ---------- form ---------- */
+document.getElementById('form').addEventListener('submit',e=>{
+ e.preventDefault();const s=document.getElementById('sent');const v=id=>document.getElementById(id).value.trim();
+ const err=[];if(!v('fn'))err.push('your name');if(!/^\S+@\S+\.\S+$/.test(v('fe')))err.push('a valid email');if(!document.getElementById('fok').checked)err.push('your consent');
+ s.classList.add('on');
+ s.textContent=err.length?'Almost there — please add '+err.join(', ')+'.':`Thank you, ${v('fn').split(' ')[0]}! In the live site this request lands in the studio's inbox and in a Google Sheet, and you get a confirmation email.`;
+ if(!err.length)e.target.querySelectorAll('input,select,textarea,button').forEach(x=>x.disabled=true);
+});
+
+/* ---------- menu ---------- */
+const burger=document.getElementById('burger'),menu=document.getElementById('menu');
+burger.onclick=()=>{const o=menu.classList.toggle('open');burger.setAttribute('aria-expanded',o)};
+menu.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>menu.classList.remove('open')));
+
+/* ---------- motion ---------- */
+if(window.gsap&&window.Lenis&&!reduced){
+ gsap.registerPlugin(ScrollTrigger,SplitText);
+ const lenis=new Lenis({lerp:.09});
+ lenis.on('scroll',ScrollTrigger.update);
+ gsap.ticker.add(t=>lenis.raf(t*1000));gsap.ticker.lagSmoothing(0);
+ document.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener('click',e=>{const t=a.getAttribute('href');if(t.length>1){e.preventDefault();lenis.scrollTo(t==='#top'?0:t,{offset:-70,duration:1.4})}}));
+
+ // loader → hero
+ const p={v:0},pct=document.getElementById('pct');
+ const words=new SplitText('#heroTitle .line',{type:'words',mask:'words'}).words;
+ const tl=gsap.timeline({defaults:{ease:'expo.out'}});
+ tl.from('.loader .word span',{yPercent:110,duration:1.1})
+   .to(p,{v:100,duration:1.1,ease:'power2.inOut',onUpdate:()=>pct.textContent=Math.round(p.v)},0)
+   .to('.loader',{yPercent:-100,duration:1.1,ease:'expo.inOut'},'+=.1')
+   .set('.loader',{display:'none'})
+   .from('#heroMedia',{clipPath:'inset(100% 0% 0% 0%)',duration:1.5},'-=.6')
+   .to('#heroMedia img',{scale:1,duration:2.2},'<')
+   .from(words,{yPercent:110,duration:1.3,stagger:.07},'<.15')
+   .from('.hero .fade,.nav',{opacity:0,y:16,duration:1,stagger:.08},'<.4')
+   .from('#heroMedia .tag',{opacity:0,y:20,duration:.9},'<.2')
+   .from('.badge',{scale:0,rotate:-90,duration:1.2},'<');
+
+ // nav: hides when scrolling down
+ let last=0;const nav=document.getElementById('nav');
+ lenis.on('scroll',({scroll})=>{nav.classList.toggle('hide',scroll>last&&scroll>300);nav.classList.toggle('solid',scroll>40);last=scroll});
+
+ // marquee follows scroll speed and direction
+ const loop=gsap.to('#track',{xPercent:-50,duration:28,ease:'none',repeat:-1});
+ lenis.on('scroll',({velocity})=>{gsap.to(loop,{timeScale:(velocity<0?-1:1)*(1+Math.min(Math.abs(velocity)/6,4)),duration:.3,overwrite:true});gsap.to(loop,{timeScale:velocity<0?-1:1,duration:1.2,delay:.3})});
+
+ // statement words light up while scrolling
+ const st=new SplitText('#statement',{type:'words',wordsClass:'word'});
+ gsap.to(st.words,{opacity:1,stagger:.1,ease:'none',scrollTrigger:{trigger:'#statement',start:'top 80%',end:'bottom 45%',scrub:true}});
+
+ // headings
+ document.querySelectorAll('.h2').forEach(h=>{const s=new SplitText(h,{type:'lines',mask:'lines'});gsap.from(s.lines,{yPercent:105,duration:1.2,stagger:.08,ease:'expo.out',scrollTrigger:{trigger:h,start:'top 85%'}})});
+
+ // classes: pinned horizontal scroll on desktop, simple reveals on mobile
+ const mm=gsap.matchMedia();
+ mm.add('(min-width:901px)',()=>{const rail=document.getElementById('rail');
+  gsap.to(rail,{x:()=>-(rail.scrollWidth-innerWidth),ease:'none',scrollTrigger:{trigger:'#classes',start:'top top',end:()=>'+='+(rail.scrollWidth-innerWidth),pin:true,scrub:1,invalidateOnRefresh:true}})});
+ mm.add('(max-width:900px)',()=>{gsap.utils.toArray('.card').forEach(c=>gsap.from(c,{y:60,opacity:0,duration:1,ease:'expo.out',scrollTrigger:{trigger:c,start:'top 88%'}}))});
+
+ // counters
+ document.querySelectorAll('[data-count]').forEach(el=>{const o={n:0};gsap.to(o,{n:+el.dataset.count,duration:2,ease:'power3.out',scrollTrigger:{trigger:el,start:'top 85%'},onStart:()=>el.textContent='0',onUpdate:()=>el.textContent=Math.round(o.n)+(el.dataset.suffix||'')})});
+
+ // reveals and parallax
+ gsap.from('.plan',{y:80,opacity:0,duration:1.2,stagger:.12,ease:'expo.out',scrollTrigger:{trigger:'.plans',start:'top 80%'}});
+ gsap.from('#slots .slot',{y:30,opacity:0,duration:.9,stagger:.06,ease:'power3.out',scrollTrigger:{trigger:'#slots',start:'top 85%'}});
+ gsap.to('[data-parallax]',{yPercent:12,ease:'none',scrollTrigger:{trigger:'.quote',start:'top bottom',end:'bottom top',scrub:true}});
+ gsap.from('footer .giant',{yPercent:40,ease:'none',scrollTrigger:{trigger:'footer',start:'top bottom',end:'bottom bottom',scrub:true}});
+
+ // cursor and magnetic buttons (mouse only)
+ if(matchMedia('(hover:hover) and (pointer:fine)').matches){
+  const cur=document.querySelector('.cursor');const qx=gsap.quickTo(cur,'x',{duration:.25,ease:'power3'}),qy=gsap.quickTo(cur,'y',{duration:.25,ease:'power3'});
+  addEventListener('pointermove',e=>{qx(e.clientX);qy(e.clientY)});
+  document.querySelectorAll('a,button,.card').forEach(el=>{el.addEventListener('pointerenter',()=>cur.classList.add('big'));el.addEventListener('pointerleave',()=>cur.classList.remove('big'))});
+  document.querySelectorAll('[data-magnetic]').forEach(el=>{
+   el.addEventListener('pointermove',e=>{const r=el.getBoundingClientRect();gsap.to(el,{x:(e.clientX-r.left-r.width/2)*.3,y:(e.clientY-r.top-r.height/2)*.4,duration:.6,ease:'power3.out'})});
+   el.addEventListener('pointerleave',()=>gsap.to(el,{x:0,y:0,duration:.9,ease:'elastic.out(1,.4)'}));
+  });
+ }
+ addEventListener('load',()=>ScrollTrigger.refresh());
+}else{document.querySelector('.loader')?.remove()}
+</script>
+</body>
+</html>

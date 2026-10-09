@@ -1,0 +1,328 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Il Portico — Trattoria piemontese, Torino</title>
+<meta name="description" content="Cucina piemontese di stagione sotto i portici di Torino. Sito dimostrativo progettato e sviluppato da Alberto Gagliardi.">
+<meta property="og:image" content="https://images.unsplash.com/photo-1447279506476-3faec8071eee?auto=format&fit=crop&w=1200&q=80">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://images.unsplash.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Manrope:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lenis@1.3.26/dist/lenis.css">
+<style>
+:root{--night:#100d0b;--night2:#1a1512;--cream:#efe6d8;--cream2:#cfc3b1;--mute:#8d8174;--gold:#c8a46b;--wine:#7b2430;
+ --line:rgba(239,230,216,.14);--serif:"Cormorant Garamond",Georgia,serif;--sans:Manrope,system-ui,sans-serif;
+ --ease:cubic-bezier(.22,1,.36,1);--pad:clamp(20px,4.5vw,64px)}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--night);color:var(--cream);font:400 16px/1.65 var(--sans);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img{display:block;width:100%;height:100%;object-fit:cover}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+::selection{background:var(--gold);color:var(--night)}
+.kicker{font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:var(--gold)}
+.serif{font-family:var(--serif);font-weight:400}
+body::after{content:"";position:fixed;inset:-50%;pointer-events:none;z-index:90;opacity:.07;
+ background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");animation:grain 1s steps(5) infinite}
+@keyframes grain{0%{transform:translate(0,0)}25%{transform:translate(-3%,2%)}50%{transform:translate(2%,-3%)}75%{transform:translate(-2%,-1%)}100%{transform:translate(1%,3%)}}
+.ribbon{position:fixed;left:16px;bottom:16px;z-index:80;background:rgba(239,230,216,.92);color:var(--night);font-size:12px;padding:8px 14px;border-radius:99px;white-space:nowrap}
+
+/* nav */
+.nav{position:fixed;inset:0 0 auto;z-index:50;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:24px var(--pad);transition:background .5s,padding .5s var(--ease)}
+.nav.solid{background:rgba(16,13,11,.78);backdrop-filter:blur(14px);padding-top:14px;padding-bottom:14px;border-bottom:1px solid var(--line)}
+.nav .links{display:flex;gap:32px;font-size:13px;letter-spacing:.12em;text-transform:uppercase}
+.nav .links a{opacity:.8;transition:opacity .3s}.nav .links a:hover{opacity:1}
+.brand{text-align:center;font-family:var(--serif);font-size:30px;line-height:1;letter-spacing:.02em}
+.brand small{display:block;font:500 9px var(--sans);letter-spacing:.42em;color:var(--gold);margin-top:6px}
+.nav .right{justify-self:end;display:flex;gap:22px;align-items:center}
+.btn{display:inline-flex;align-items:center;gap:12px;padding:14px 26px;border:1px solid var(--gold);color:var(--cream);font-size:12px;letter-spacing:.22em;text-transform:uppercase;position:relative;overflow:hidden;isolation:isolate;transition:color .5s var(--ease)}
+.btn::before{content:"";position:absolute;inset:0;background:var(--gold);transform:scaleX(0);transform-origin:right;transition:transform .6s var(--ease);z-index:-1}
+.btn:hover{color:var(--night)}.btn:hover::before{transform:scaleX(1);transform-origin:left}
+.btn.solid{background:var(--gold);color:var(--night)}
+.btn.solid::before{background:var(--cream)}
+.phone{font-size:13px;opacity:.75}
+
+/* hero */
+.hero{position:relative;height:100svh;min-height:640px;overflow:hidden}
+.hero .bg{position:absolute;inset:0}
+.hero .bg img{transform:scale(1.18)}
+.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(16,13,11,.55) 0%,rgba(16,13,11,.15) 35%,rgba(16,13,11,.35) 60%,var(--night) 100%)}
+.hero .content{position:absolute;inset:auto var(--pad) clamp(40px,7vh,80px);z-index:2;display:grid;grid-template-columns:1fr auto;align-items:end;gap:30px}
+.hero h1{font-family:var(--serif);font-weight:400;font-size:clamp(84px,15vw,260px);line-height:.8;letter-spacing:-.02em}
+.hero h1 i{color:var(--gold)}
+.hero .side{max-width:330px;display:flex;flex-direction:column;gap:22px;padding-bottom:18px}
+.hero .side p{color:var(--cream2);font-size:15px}
+.open{display:inline-flex;align-items:center;gap:10px;font-size:12px;letter-spacing:.16em;text-transform:uppercase}
+.open i{width:8px;height:8px;border-radius:50%;background:#6fbf73;box-shadow:0 0 12px #6fbf73}
+.open.closed i{background:#d0675d;box-shadow:0 0 12px #d0675d}
+.vert{position:absolute;right:calc(var(--pad) - 6px);top:50%;z-index:2;writing-mode:vertical-rl;font-size:11px;letter-spacing:.4em;color:var(--cream2);transform:translateY(-50%)}
+
+/* intro */
+.intro{padding:clamp(110px,15vw,210px) var(--pad);display:grid;grid-template-columns:1.1fr 1fr;gap:clamp(40px,7vw,120px);align-items:center}
+.intro h2{font-family:var(--serif);font-weight:400;font-size:clamp(44px,5.6vw,92px);line-height:.98;margin:22px 0 28px}
+.intro h2 i{color:var(--gold)}
+.intro p{color:var(--cream2);max-width:520px;margin-bottom:16px}
+.sign{font-family:var(--serif);font-style:italic;font-size:30px;color:var(--gold);margin-top:18px}
+.stack{position:relative;height:clamp(460px,52vw,720px)}
+.stack figure{position:absolute;overflow:hidden}
+.stack .a{inset:0 18% 14% 0}
+.stack .b{width:52%;aspect-ratio:3/4;right:0;bottom:0;border:10px solid var(--night)}
+.stack figcaption{position:absolute;left:14px;bottom:12px;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--cream)}
+
+/* menu */
+.menu{padding:clamp(90px,12vw,160px) var(--pad);background:var(--night2);position:relative}
+.menu .top{display:flex;justify-content:space-between;align-items:flex-end;gap:30px;flex-wrap:wrap;margin-bottom:56px}
+.h2{font-family:var(--serif);font-weight:400;font-size:clamp(52px,7.5vw,128px);line-height:.9;letter-spacing:-.01em}
+.h2 i{color:var(--gold)}
+.tabs{display:flex;gap:4px;flex-wrap:wrap}
+.tabs button{padding:10px 18px;font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--cream2);border-bottom:1px solid transparent;transition:color .3s,border-color .3s}
+.tabs button[aria-selected=true]{color:var(--gold);border-color:var(--gold)}
+.dishes{display:grid;grid-template-columns:1fr 1fr;column-gap:clamp(40px,6vw,100px)}
+.dish{display:grid;grid-template-columns:1fr auto;gap:4px 20px;padding:26px 0;border-top:1px solid var(--line);cursor:default;position:relative}
+.dish h3{font-family:var(--serif);font-weight:500;font-size:clamp(26px,2.4vw,34px);line-height:1.1;transition:color .4s,transform .6s var(--ease)}
+.dish:hover h3{color:var(--gold);transform:translateX(8px)}
+.dish .pr{font-family:var(--serif);font-size:26px;color:var(--gold)}
+.dish p{grid-column:1/-1;color:var(--mute);font-size:14px}
+.v{font:600 10px var(--sans);letter-spacing:.1em;color:#9ac08a;border:1px solid #5d7a52;padding:1px 6px;margin-left:10px;vertical-align:middle;border-radius:2px}
+.note{margin-top:40px;color:var(--mute);font-size:13px}
+.preview{position:fixed;left:0;top:0;width:280px;aspect-ratio:4/5;pointer-events:none;z-index:60;overflow:hidden;opacity:0;transform:scale(.8);border-radius:4px}
+.preview img{position:absolute;inset:0}
+
+/* gallery */
+.gallery{position:relative;overflow:hidden;padding:clamp(80px,10vw,140px) 0}
+.gallery .head{padding:0 var(--pad) 48px;display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap}
+.strip{display:flex;gap:24px;padding:0 var(--pad);width:max-content;align-items:flex-start}
+.strip figure{flex:none;overflow:hidden;position:relative}
+.strip figure:nth-child(odd){width:min(560px,80vw);aspect-ratio:4/3}
+.strip figure:nth-child(even){width:min(380px,64vw);aspect-ratio:3/4;margin-top:80px}
+.strip figcaption{position:absolute;left:16px;bottom:14px;font-size:11px;letter-spacing:.2em;text-transform:uppercase;text-shadow:0 1px 8px rgba(0,0,0,.6)}
+.strip img{transform:scale(1.12)}
+
+/* press */
+.press{padding:clamp(90px,12vw,170px) var(--pad);text-align:center;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.press blockquote{font-family:var(--serif);font-style:italic;font-size:clamp(34px,4.6vw,76px);line-height:1.08;max-width:1100px;margin:26px auto}
+.press cite{font-style:normal;font-size:12px;letter-spacing:.24em;color:var(--mute);text-transform:uppercase}
+.stars{color:var(--gold);letter-spacing:.3em}
+
+/* booking */
+.book{padding:clamp(90px,12vw,160px) var(--pad);display:grid;grid-template-columns:1fr 1.1fr;gap:clamp(40px,7vw,120px)}
+.hours{list-style:none;margin:36px 0}
+.hours li{display:flex;justify-content:space-between;padding:14px 0;border-bottom:1px solid var(--line);font-size:15px;color:var(--cream2)}
+.hours li.today{color:var(--gold)}
+.addr{color:var(--cream2);font-size:15px}
+form{background:var(--cream);color:var(--night);padding:clamp(28px,4vw,56px);display:grid;gap:22px;align-content:start}
+form h3{font-family:var(--serif);font-weight:500;font-size:44px;line-height:1}
+form .sub{font-size:14px;color:#6d6155;margin-top:-10px}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.row3{display:grid;grid-template-columns:1.4fr 1fr .8fr;gap:18px}
+label span{display:block;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#6d6155;margin-bottom:6px}
+input,select,textarea{width:100%;padding:13px 0;border:0;border-bottom:1px solid rgba(16,13,11,.25);background:transparent;font:400 17px var(--sans);color:var(--night);outline:none;border-radius:0;transition:border-color .3s}
+input:focus,select:focus,textarea:focus{border-color:var(--night)}
+textarea{resize:vertical}
+form .btn{justify-self:start;color:var(--night);border-color:var(--night)}
+form .btn::before{background:var(--night)}
+form .btn:hover{color:var(--cream)}
+.msg{display:none;padding:16px 18px;font-size:15px}
+.msg.ok{display:block;background:#dfe9d6;color:#2c4a22}
+.msg.err{display:block;background:#f2d9d4;color:#7b2430}
+
+footer{padding:80px var(--pad) 90px;border-top:1px solid var(--line);overflow:hidden}
+footer .cols{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:30px;font-size:14px;color:var(--cream2);margin-bottom:60px}
+footer b{display:block;color:var(--cream);font-weight:500;margin-bottom:10px;font-size:12px;letter-spacing:.2em;text-transform:uppercase}
+footer .giant{font-family:var(--serif);font-style:italic;font-size:clamp(110px,22vw,380px);line-height:.8;color:var(--gold);white-space:nowrap;text-align:center}
+
+@media (max-width:900px){
+ .nav{grid-template-columns:1fr auto}.nav .links,.phone{display:none}.brand{text-align:left}
+ .hero .content{grid-template-columns:1fr}.vert{display:none}
+ .intro,.book{grid-template-columns:1fr}
+ .dishes{grid-template-columns:1fr}
+ .strip{flex-direction:column;width:auto}.strip figure:nth-child(n){width:100%;margin-top:0;aspect-ratio:4/3}
+ .row,.row3{grid-template-columns:1fr}
+ footer .cols{grid-template-columns:1fr 1fr}
+ .preview{display:none}
+ .ribbon{right:16px;white-space:normal;text-align:center;font-size:11px;border-radius:14px}
+ .tabs{gap:0;width:100%;justify-content:space-between}.tabs button{padding:10px 6px;letter-spacing:.12em}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="ribbon">Sito dimostrativo · locale di fantasia · design e codice di Alberto Gagliardi</div>
+
+<header class="nav" id="nav">
+ <nav class="links"><a href="#storia">Storia</a><a href="#menu">Menù</a><a href="#sala">La sala</a></nav>
+ <a href="#top" class="brand">Il Portico<small>TRATTORIA · TORINO</small></a>
+ <div class="right"><span class="phone">011 000 0000</span><a href="#prenota" class="btn">Prenota</a></div>
+</header>
+
+<main id="top">
+<section class="hero">
+ <div class="bg"><img src="https://images.unsplash.com/photo-1447279506476-3faec8071eee?auto=format&fit=crop&w=2000&q=80" alt="Mani che lavorano la pasta fresca" fetchpriority="high"></div>
+ <span class="vert">CUCINA PIEMONTESE · DAL 1987</span>
+ <div class="content">
+  <h1 id="title">Il <i>Portico</i></h1>
+  <div class="side">
+   <span class="open" id="open"><i></i><span>Aperto ora</span></span>
+   <p>Tajarin tirati a mano ogni mattina, brasato al Barolo e i vini delle Langhe. Una trattoria vera, sotto i portici di Torino.</p>
+   <div><a href="#prenota" class="btn solid">Prenota un tavolo</a></div>
+  </div>
+ </div>
+</section>
+
+<section class="intro" id="storia">
+ <div>
+  <span class="kicker">La nostra storia</span>
+  <h2 class="reveal">Tre generazioni, <i>una sola</i> cucina.</h2>
+  <p>Nonna Teresa apriva queste porte nel 1987 con sei tavoli e un menù scritto a mano. Oggi in cucina c'è suo nipote Matteo, ma la pasta si tira ancora ogni mattina, alle sei.</p>
+  <p>Lavoriamo con piccoli produttori piemontesi: Fassona dalla Granda, formaggi d'alpeggio, verdure dell'orto di Carmagnola. Il menù cambia quando cambia la stagione.</p>
+  <p class="sign">La famiglia Bertola</p>
+ </div>
+ <div class="stack">
+  <figure class="a"><img loading="lazy" data-speed="-6" src="https://images.unsplash.com/photo-1642354571956-d77dfd9596bb?auto=format&fit=crop&w=1100&q=80" alt="Pasta fresca alla macchina"><figcaption>Il laboratorio</figcaption></figure>
+  <figure class="b"><img loading="lazy" data-speed="8" src="https://images.unsplash.com/photo-1601751911508-fd69ffc08fa2?auto=format&fit=crop&w=800&q=80" alt="Tajarin appena tagliati"><figcaption>Tajarin, 40 tuorli</figcaption></figure>
+ </div>
+</section>
+
+<section class="menu" id="menu">
+ <div class="top"><h2 class="h2 reveal">Il menù <i>d'autunno</i></h2><div class="tabs" role="tablist" id="tabs"></div></div>
+ <div class="dishes" id="dishes"></div>
+ <p class="note">V = vegetariano · Coperto 3 € · Per allergie e intolleranze chiedi al personale: la lista degli allergeni è sempre disponibile.</p>
+ <div class="preview" id="preview" aria-hidden="true"></div>
+</section>
+
+<section class="gallery" id="sala">
+ <div class="head"><h2 class="h2 reveal">La <i>sala</i>, la cucina, il vino.</h2><span class="kicker">Scorri</span></div>
+ <div class="strip" id="strip">
+  <figure><img loading="lazy" src="https://images.unsplash.com/photo-1675965218658-bd6f516742ac?auto=format&fit=crop&w=1200&q=80" alt="La sala con i tavoli apparecchiati"><figcaption>La sala · 42 coperti</figcaption></figure>
+  <figure><img loading="lazy" src="https://images.unsplash.com/photo-1626300006988-42a927fd80ee?auto=format&fit=crop&w=800&q=80" alt="Piatto di pasta"><figcaption>Agnolotti del plin</figcaption></figure>
+  <figure><img loading="lazy" src="https://images.unsplash.com/photo-1751011983324-fe9d30fe9efd?auto=format&fit=crop&w=1200&q=80" alt="Tavolo con bicchieri da vino"><figcaption>La cantina · 180 etichette</figcaption></figure>
+  <figure><img loading="lazy" src="https://images.unsplash.com/photo-1692197275441-40c874f40385?auto=format&fit=crop&w=800&q=80" alt="Secondo di carne"><figcaption>Brasato al Barolo</figcaption></figure>
+  <figure><img loading="lazy" src="https://images.unsplash.com/photo-1574966739987-65e38db0f7ce?auto=format&fit=crop&w=1200&q=80" alt="Tavolo per eventi privati"><figcaption>Eventi privati</figcaption></figure>
+ </div>
+</section>
+
+<section class="press">
+ <div class="stars">★★★★★</div>
+ <blockquote class="reveal">«Il posto dove i torinesi portano gli amici quando vogliono fare bella figura senza farlo sembrare.»</blockquote>
+ <cite>Recensione di esempio · sito dimostrativo</cite>
+</section>
+
+<section class="book" id="prenota">
+ <div>
+  <span class="kicker">Orari e indirizzo</span>
+  <h2 class="h2 reveal" style="margin-top:20px">Ti <i>aspettiamo</i>.</h2>
+  <ul class="hours" id="hours"></ul>
+  <p class="addr">Via Esempio 21, 10123 Torino (indirizzo di fantasia)<br>Tel. 011 000 0000 · info@ilportico-demo.it</p>
+ </div>
+ <form id="f" novalidate>
+  <h3>Prenota un tavolo</h3>
+  <p class="sub">Ti confermiamo via email entro un'ora. Per gruppi oltre 10 persone chiamaci.</p>
+  <div class="row"><label><span>Nome</span><input id="nome" autocomplete="name"></label><label><span>Telefono</span><input id="tel" type="tel" autocomplete="tel"></label></div>
+  <label><span>Email</span><input id="mail" type="email" autocomplete="email"></label>
+  <div class="row3"><label><span>Data</span><input id="data" type="date"></label><label><span>Ora</span><select id="ora"></select></label><label><span>Persone</span><select id="pers"></select></label></div>
+  <label><span>Note</span><textarea id="note" rows="2" placeholder="Allergie, seggiolone, un compleanno..."></textarea></label>
+  <button class="btn" type="submit">Invia la richiesta</button>
+  <div class="msg" id="msg" role="status"></div>
+ </form>
+</section>
+</main>
+
+<footer>
+ <div class="cols">
+  <div><b>Trattoria Il Portico</b>Cucina piemontese di stagione dal 1987. Sito dimostrativo: nomi, indirizzo, recensioni e recapiti sono di fantasia.</div>
+  <div><b>Orari</b>Mar–Dom<br>12:00–14:30 · 19:00–22:30<br>Lunedì chiuso</div>
+  <div><b>Seguici</b>Instagram<br>Newsletter</div>
+  <div><b>Sito</b>Design e codice<br>Alberto Gagliardi</div>
+ </div>
+ <div class="giant">Il Portico</div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/SplitText.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.3.26/dist/lenis.min.js"></script>
+<script>
+const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const U=(id,w)=>`https://images.unsplash.com/${id}?auto=format&fit=crop&w=${w}&q=80`;
+/* ---------- menu ---------- */
+const MENU={
+ "Antipasti":[["Vitello tonnato","Girello di Fassona cotto rosa, salsa tonnata della casa",14,0,"photo-1692197275441-40c874f40385"],["Battuta al coltello","Fassona della Granda, olio, limone e sale di Cervia",15,0,"photo-1692197275441-40c874f40385"],["Peperoni e bagna cauda","Peperoni di Carmagnola arrostiti, acciughe, aglio dolce",12,0,"photo-1626300006988-42a927fd80ee"],["Flan di cardi","Cardo gobbo di Nizza, fonduta di Castelmagno",11,1,"photo-1626300006988-42a927fd80ee"]],
+ "Primi":[["Tajarin al burro e salvia","Quaranta tuorli, tirati a mano ogni mattina",13,1,"photo-1601751911508-fd69ffc08fa2"],["Agnolotti del plin","Ripieno di tre arrosti, al sugo d'arrosto",15,0,"photo-1626300006988-42a927fd80ee"],["Risotto al Barolo","Carnaroli, Barolo DOCG, mantecato al Castelmagno",16,1,"photo-1606091484089-089fa86fad4f"],["Gnocchi alla bava","Patate di montagna e Toma d'alpeggio",14,1,"photo-1708514193930-2977def8669a"]],
+ "Secondi":[["Brasato al Barolo","Otto ore di cottura, polenta macinata a pietra",23,0,"photo-1692197275441-40c874f40385"],["Bollito misto","Sette tagli con bagnet verde e rosso, solo nel weekend",25,0,"photo-1692197275441-40c874f40385"],["Coniglio all'Arneis","Olive taggiasche e patate al forno",20,0,"photo-1692197275441-40c874f40385"],["Tomini al verde","Tomini freschi, prezzemolo, aglio e peperoncino",12,1,"photo-1626300006988-42a927fd80ee"]],
+ "Dolci":[["Bonet","Amaretti, cacao e rum, la ricetta della nonna",8,1,"photo-1606091484089-089fa86fad4f"],["Panna cotta","Al caramello o ai frutti di bosco",7,1,"photo-1606091484089-089fa86fad4f"],["Zabaione al Marsala","Montato al momento, con paste di meliga",9,1,"photo-1606091484089-089fa86fad4f"],["Torta di nocciole","Nocciola Piemonte IGP, zabaione freddo",8,1,"photo-1606091484089-089fa86fad4f"]]};
+const tabs=document.getElementById('tabs'),dishes=document.getElementById('dishes');
+function showMenu(k,animate){
+ [...tabs.children].forEach(b=>b.setAttribute('aria-selected',b.textContent===k));
+ dishes.innerHTML=MENU[k].map(([n,d,p,v,img])=>`<div class="dish" data-img="${img}"><h3>${n}${v?'<span class="v">V</span>':''}</h3><span class="pr">${p}</span><p>${d}</p></div>`).join('');
+ if(animate&&window.gsap&&!reduced)gsap.from('.dish',{y:30,opacity:0,duration:.8,stagger:.05,ease:'power3.out'});
+}
+Object.keys(MENU).forEach(k=>{const b=document.createElement('button');b.type='button';b.role='tab';b.textContent=k;b.onclick=()=>showMenu(k,true);tabs.appendChild(b)});
+showMenu('Antipasti');
+
+/* ---------- orari e prenotazione ---------- */
+const GIORNI=["Domenica","Lunedì","Martedì","Mercoledì","Giovedì","Venerdì","Sabato"],TURNI=[["12:00","14:30"],["19:00","22:30"]],oggi=new Date();
+document.getElementById('hours').innerHTML=[1,2,3,4,5,6,0].map(g=>`<li class="${g===oggi.getDay()?'today':''}"><span>${GIORNI[g]}</span><span>${g===1?'Chiuso':TURNI.map(t=>t.join('–')).join(' · ')}</span></li>`).join('');
+const min=s=>{const[h,m]=s.split(':').map(Number);return h*60+m};
+function aperto(d){if(d.getDay()===1)return false;const m=d.getHours()*60+d.getMinutes();return TURNI.some(([a,b])=>m>=min(a)&&m<min(b))}
+if(!aperto(oggi)){const o=document.getElementById('open');o.classList.add('closed');o.lastElementChild.textContent=oggi.getDay()===1?'Oggi chiuso · prenota online':'Ora chiuso · prenota online'}
+const ora=document.getElementById('ora'),pers=document.getElementById('pers'),data=document.getElementById('data');
+["12:00","12:30","13:00","13:30","19:30","20:00","20:30","21:00","21:30"].forEach(o=>ora.add(new Option(o)));
+for(let i=1;i<=10;i++)pers.add(new Option(i));pers.value=2;
+const iso=d=>new Date(d.getTime()-d.getTimezoneOffset()*6e4).toISOString().slice(0,10);
+const dom=new Date(oggi);dom.setDate(dom.getDate()+(oggi.getDay()===0?2:1));data.min=iso(oggi);data.value=iso(dom);
+document.getElementById('f').addEventListener('submit',e=>{
+ e.preventDefault();const msg=document.getElementById('msg');const v=id=>document.getElementById(id).value.trim();const err=[];
+ if(!v('nome'))err.push('il nome');if(!/^[+0-9 ]{6,}$/.test(v('tel')))err.push('un telefono valido');if(v('mail')&&!/^\S+@\S+\.\S+$/.test(v('mail')))err.push("un'email valida");
+ const d=new Date(v('data')+'T12:00');
+ if(!v('data')||v('data')<iso(oggi))err.push('una data da oggi in poi');else if(d.getDay()===1)err.push('un giorno diverso dal lunedì (siamo chiusi)');
+ if(err.length){msg.className='msg err';msg.textContent='Manca ancora '+err.join(', ')+'.';return}
+ msg.className='msg ok';msg.textContent=`Grazie ${v('nome').split(' ')[0]}! Richiesta per ${v('pers')} persone ${d.toLocaleDateString('it-IT',{weekday:'long',day:'numeric',month:'long'})} alle ${v('ora')}. Nel sito reale arriva un'email al ristorante e una conferma a te.`;
+});
+
+/* ---------- motion ---------- */
+if(window.gsap&&window.Lenis&&!reduced){
+ gsap.registerPlugin(ScrollTrigger,SplitText);
+ const lenis=new Lenis({lerp:.08});lenis.on('scroll',ScrollTrigger.update);
+ gsap.ticker.add(t=>lenis.raf(t*1000));gsap.ticker.lagSmoothing(0);
+ document.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener('click',e=>{const t=a.getAttribute('href');if(t.length>1){e.preventDefault();lenis.scrollTo(t==='#top'?0:t,{offset:-60,duration:1.6})}}));
+ const nav=document.getElementById('nav');lenis.on('scroll',({scroll})=>nav.classList.toggle('solid',scroll>60));
+
+ // hero: slow zoom, title by letters
+ const chars=new SplitText('#title',{type:'chars',mask:'chars'}).chars;
+ gsap.timeline({defaults:{ease:'expo.out'}})
+  .from('.hero .bg',{opacity:0,duration:1.6,ease:'power2.out'})
+  .to('.hero .bg img',{scale:1.02,duration:3.2,ease:'power2.out'},0)
+  .from(chars,{yPercent:110,duration:1.4,stagger:.045},.35)
+  .from('.hero .side>*,.vert,.nav',{opacity:0,y:20,duration:1.1,stagger:.08},.8);
+ gsap.to('.hero .bg',{yPercent:18,ease:'none',scrollTrigger:{trigger:'.hero',start:'top top',end:'bottom top',scrub:true}});
+ gsap.to('.hero .content',{yPercent:-30,opacity:.2,ease:'none',scrollTrigger:{trigger:'.hero',start:'top top',end:'bottom top',scrub:true}});
+
+ // headings and quote
+ document.querySelectorAll('.reveal').forEach(h=>{const s=new SplitText(h,{type:'lines',mask:'lines'});gsap.from(s.lines,{yPercent:105,duration:1.3,stagger:.1,ease:'expo.out',scrollTrigger:{trigger:h,start:'top 85%'}})});
+
+ // images: clip reveal + parallax
+ gsap.utils.toArray('.stack figure').forEach((f,i)=>gsap.from(f,{clipPath:'inset(100% 0% 0% 0%)',duration:1.6,ease:'expo.inOut',delay:i*.15,scrollTrigger:{trigger:'.stack',start:'top 75%'}}));
+ gsap.utils.toArray('[data-speed]').forEach(img=>gsap.fromTo(img,{yPercent:-+img.dataset.speed},{yPercent:+img.dataset.speed,scale:1.15,ease:'none',scrollTrigger:{trigger:img.closest('figure'),start:'top bottom',end:'bottom top',scrub:true}}));
+ gsap.from('#dishes .dish',{y:30,opacity:0,duration:.9,stagger:.05,ease:'power3.out',scrollTrigger:{trigger:'#dishes',start:'top 80%'}});
+
+ // menu: photo follows the cursor
+ if(matchMedia('(hover:hover) and (pointer:fine)').matches){
+  const pv=document.getElementById('preview');const qx=gsap.quickTo(pv,'x',{duration:.6,ease:'power3'}),qy=gsap.quickTo(pv,'y',{duration:.6,ease:'power3'});
+  let cur='';
+  dishes.addEventListener('pointermove',e=>{qx(e.clientX+30);qy(e.clientY-pv.offsetHeight/2);const d=e.target.closest('.dish');if(d&&d.dataset.img!==cur){cur=d.dataset.img;const im=new Image();im.src=U(cur,600);im.alt='';pv.appendChild(im);gsap.fromTo(im,{clipPath:'inset(100% 0 0 0)'},{clipPath:'inset(0% 0 0 0)',duration:.7,ease:'expo.out',onComplete:()=>{while(pv.children.length>1)pv.firstChild.remove()}})}});
+  dishes.addEventListener('pointerenter',()=>gsap.to(pv,{opacity:1,scale:1,duration:.5,ease:'expo.out'}));
+  dishes.addEventListener('pointerleave',()=>{gsap.to(pv,{opacity:0,scale:.8,duration:.4});cur=''});
+ }
+
+ // gallery: horizontal pin on desktop
+ gsap.matchMedia().add('(min-width:901px)',()=>{const s=document.getElementById('strip');
+  const tw=gsap.to(s,{x:()=>-(s.scrollWidth-innerWidth),ease:'none',scrollTrigger:{trigger:'.gallery',start:'top top',end:()=>'+='+(s.scrollWidth-innerWidth),pin:true,scrub:1,invalidateOnRefresh:true}});
+  gsap.utils.toArray('.strip img').forEach(img=>gsap.to(img,{xPercent:8,ease:'none',scrollTrigger:{trigger:img,containerAnimation:tw,start:'left right',end:'right left',scrub:true}}));
+ });
+ gsap.from('#f',{y:80,opacity:0,duration:1.4,ease:'expo.out',scrollTrigger:{trigger:'#prenota',start:'top 75%'}});
+ gsap.from('footer .giant',{yPercent:60,opacity:0,ease:'none',scrollTrigger:{trigger:'footer',start:'top bottom',end:'bottom bottom',scrub:true}});
+ addEventListener('load',()=>ScrollTrigger.refresh());
+}
+</script>
+</body>
+</html>

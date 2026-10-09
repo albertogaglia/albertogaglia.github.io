@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Alberto Gagliardi · Websites &amp; web apps</title>
+<meta name="description" content="Custom websites, web apps and business automations by Alberto Gagliardi, Turin. Live demo projects.">
+<meta property="og:image" content="img/pilates.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lenis@1.3.26/dist/lenis.css">
+<style>
+:root{--bg:#efede8;--ink:#0e0e0e;--mute:#6b6862;--line:rgba(14,14,14,.14);--acc:#ff4f1f;--card:#e6e3dc;
+ --sans:Archivo,system-ui,sans-serif;--mono:"JetBrains Mono",ui-monospace,monospace;--pad:clamp(20px,4vw,56px);--ease:cubic-bezier(.22,1,.36,1)}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font:400 16px/1.55 var(--sans);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+img{display:block;width:100%;height:100%;object-fit:cover}
+::selection{background:var(--acc);color:#fff}
+.mono{font:500 12px var(--mono);letter-spacing:.02em;text-transform:uppercase}
+.wide{font-stretch:125%;font-weight:800;letter-spacing:-.04em}
+
+nav{position:fixed;inset:0 0 auto;z-index:50;display:flex;justify-content:space-between;align-items:center;padding:16px var(--pad);background:color-mix(in srgb,var(--bg) 82%,transparent);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
+nav .me{font-weight:700;font-stretch:115%;letter-spacing:-.02em;font-size:18px}
+nav .links{display:flex;gap:28px}
+nav .links a{position:relative}
+nav .links a::after{content:"";position:absolute;left:0;right:0;bottom:-3px;height:1px;background:currentColor;transform:scaleX(0);transform-origin:right;transition:transform .5s var(--ease)}
+nav .links a:hover::after{transform:scaleX(1);transform-origin:left}
+.avail{display:inline-flex;align-items:center;gap:8px}
+.avail i{width:8px;height:8px;border-radius:50%;background:#3ddc84;box-shadow:0 0 0 0 rgba(61,220,132,.6);animation:ping 2s infinite}
+@keyframes ping{to{box-shadow:0 0 0 10px rgba(61,220,132,0)}}
+
+.hero{min-height:100svh;padding:120px var(--pad) 40px;display:flex;flex-direction:column;justify-content:space-between}
+.hero h1{font-size:clamp(46px,9.6vw,172px);line-height:.86;font-stretch:125%;font-weight:800;letter-spacing:-.055em;text-transform:uppercase}
+.hero h1 .o{color:var(--acc)}
+.hero h1 .thin{font-weight:300;font-stretch:62%;letter-spacing:-.02em}
+.hero .low{display:grid;grid-template-columns:1.6fr 1fr 1fr;gap:30px;align-items:end;margin-top:40px}
+.hero .low p{font-size:clamp(17px,1.5vw,21px);max-width:540px;line-height:1.4}
+.hero .low p.mono{font-size:12px;line-height:1.7}
+.rot{height:1.4em;overflow:hidden;display:inline-block;vertical-align:bottom;color:var(--acc)}
+.rot span{display:block}
+.pill{display:inline-flex;align-items:center;gap:14px;padding:18px 28px;background:var(--ink);color:var(--bg);border-radius:99px;font-weight:600;font-size:15px;justify-self:end;position:relative;overflow:hidden;isolation:isolate}
+.pill::before{content:"";position:absolute;inset:0;background:var(--acc);transform:translateY(101%);border-radius:inherit;transition:transform .6s var(--ease);z-index:-1}
+.pill:hover::before{transform:none}
+.pill .arr{transition:transform .5s var(--ease)}.pill:hover .arr{transform:translate(3px,-3px)}
+
+.mq{border-top:1px solid var(--line);border-bottom:1px solid var(--line);overflow:hidden;padding:18px 0;white-space:nowrap}
+.mq .tr{display:inline-flex;gap:40px;padding-right:40px;font-size:clamp(20px,2.6vw,36px);font-stretch:110%;font-weight:500;letter-spacing:-.02em}
+.mq .tr b{color:var(--acc);font-weight:500}
+
+section{padding:clamp(90px,12vw,170px) var(--pad)}
+.sh{display:grid;grid-template-columns:1.5fr 1fr;gap:30px;margin-bottom:60px;align-items:end}
+.sh h2{font-size:clamp(40px,6vw,96px);line-height:.9;font-stretch:125%;font-weight:800;letter-spacing:-.05em;text-transform:uppercase}
+.sh p{max-width:420px;justify-self:end;color:var(--mute)}
+
+.proj{display:grid;grid-template-columns:90px 1.45fr 1fr;gap:clamp(20px,3vw,48px);padding:36px 0;border-top:1px solid var(--line);align-items:start;position:relative}
+.proj:last-child{border-bottom:1px solid var(--line)}
+.proj .n{font:500 13px var(--mono);color:var(--mute);padding-top:6px}
+.proj .shot{aspect-ratio:16/10;overflow:hidden;border-radius:6px;background:var(--card);position:relative}
+.proj .shot img{object-position:top;transition:transform 1.4s var(--ease)}
+.proj:hover .shot img{transform:scale(1.04)}
+.proj .shot .go{position:absolute;right:16px;bottom:16px;background:var(--bg);border-radius:99px;padding:10px 16px;font:500 12px var(--mono);text-transform:uppercase;transform:translateY(12px);opacity:0;transition:.5s var(--ease)}
+.proj:hover .shot .go{transform:none;opacity:1}
+.proj h3{font-size:clamp(28px,3vw,46px);line-height:.95;font-stretch:120%;font-weight:700;letter-spacing:-.04em;margin-bottom:16px}
+.proj p{color:var(--mute);margin-bottom:22px;max-width:420px}
+.feats{list-style:none;border-top:1px solid var(--line);margin-bottom:22px}
+.feats li{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--line);font-size:14px}
+.feats li span{color:var(--mute);font:400 12px var(--mono)}
+.tlink{display:inline-flex;gap:10px;align-items:center;font-weight:600;border-bottom:1.5px solid var(--ink);padding-bottom:3px}
+.tlink:hover{color:var(--acc);border-color:var(--acc)}
+
+.svc{background:var(--ink);color:var(--bg);border-radius:28px;margin:0 clamp(8px,1.5vw,20px)}
+.svc .sh p{color:#9b978f}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:clamp(20px,3vw,40px)}
+.col{border:1px solid rgba(239,237,232,.16);border-radius:20px;padding:clamp(24px,3vw,40px);display:flex;flex-direction:column;transition:border-color .4s}
+.col:hover{border-color:var(--acc)}
+.col .mono{color:var(--acc)}
+.col h3{font-size:clamp(28px,3vw,44px);line-height:.95;font-stretch:120%;font-weight:700;letter-spacing:-.04em;margin:18px 0 26px}
+.col ul{list-style:none;flex:1}
+.col li{padding:13px 0;border-top:1px solid rgba(239,237,232,.12);display:flex;gap:14px}
+.col li::before{content:"→";color:var(--acc)}
+.price{display:flex;justify-content:space-between;align-items:baseline;margin-top:28px;padding-top:22px;border-top:1px solid rgba(239,237,232,.16)}
+.price b{font-size:clamp(36px,4vw,56px);font-stretch:125%;font-weight:800;letter-spacing:-.05em}
+.price span{color:#9b978f;font-size:14px}
+
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:1px solid var(--ink)}
+.step{padding:28px 24px 0 0;position:relative}
+.step .mono{color:var(--acc)}
+.step h3{font-size:24px;font-stretch:115%;font-weight:700;letter-spacing:-.03em;margin:40px 0 10px}
+.step p{color:var(--mute);font-size:15px;max-width:260px}
+.step::before{content:"";position:absolute;top:-5px;left:0;width:9px;height:9px;border-radius:50%;background:var(--ink)}
+
+.cta{text-align:center;padding-bottom:60px}
+.cta h2{font-size:clamp(64px,15vw,260px);line-height:.82;font-stretch:125%;font-weight:800;letter-spacing:-.06em;text-transform:uppercase}
+.cta h2 span{color:var(--acc)}
+.cta p{color:var(--mute);max-width:520px;margin:30px auto 34px;font-size:18px}
+footer{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;padding:26px var(--pad);border-top:1px solid var(--line);color:var(--mute)}
+
+.cur{position:fixed;left:0;top:0;z-index:60;width:86px;height:86px;margin:-43px 0 0 -43px;border-radius:50%;background:var(--acc);color:#fff;display:grid;place-items:center;font:500 11px var(--mono);text-transform:uppercase;pointer-events:none;transform:scale(0)}
+
+@media (max-width:900px){
+ nav .links{display:none}
+ .hero{min-height:auto;padding-top:110px}
+ .hero .low{grid-template-columns:1fr}.pill{justify-self:start}
+ .sh{grid-template-columns:1fr}.sh p{justify-self:start}
+ .proj{grid-template-columns:1fr}.proj .n{padding:0}
+ .cols{grid-template-columns:1fr}
+ .steps{grid-template-columns:1fr 1fr;row-gap:40px}
+ .cur{display:none}
+}
+@media (max-width:520px){.steps{grid-template-columns:1fr}.hero .low .hide{display:none}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<nav><a href="#top" class="me">Alberto Gagliardi</a><div class="links mono"><a href="#work">Work</a><a href="#services">Services</a><a href="#process">Process</a><a href="#contact">Contact</a></div><span class="avail mono"><i></i>Taking projects</span></nav>
+
+<main id="top">
+<header class="hero">
+ <h1 id="h1"><span class="ln">Websites</span> <span class="ln">that look <span class="thin">&amp;</span></span> <span class="ln o">work the part.</span></h1>
+ <div class="low">
+  <p>Custom websites and small web apps for <span class="rot" id="rot"><span>restaurants.</span><span>studios.</span><span>shops.</span><span>bakeries.</span><span>freelancers.</span></span><br>Designed and coded by hand, in English and Italian.</p>
+  <p class="mono hide" style="color:var(--mute)">Based in Turin, Italy<br>Working worldwide via Fiverr</p>
+  <a href="#work" class="pill">See the live demos <span class="arr">↗</span></a>
+ </div>
+</header>
+
+<div class="mq" aria-hidden="true"><div class="tr" id="mq"><span>One-page sites</span><b>✳</b><span>Booking forms</span><b>✳</b><span>Order systems</span><b>✳</b><span>Email notifications</span><b>✳</b><span>Dashboards</span><b>✳</b><span>Scroll animation</span><b>✳</b><span>Google Sheets backends</span><b>✳</b></div></div>
+
+<section id="work">
+ <div class="sh"><h2 class="rv">Selected<br>work</h2><p>Three demo projects for fictional businesses. The code is real: open them, click around, place a test order.</p></div>
+ <a class="proj" href="01-onepage-pilates/" data-cur="Open">
+  <span class="n">01 / 03</span>
+  <div class="shot"><img src="img/pilates.jpg" alt="Lumen pilates studio website" loading="lazy"><span class="go">Open demo ↗</span></div>
+  <div><h3>Lumen Pilates</h3><p>A one-page site for a boutique pilates studio: editorial layout, scroll-driven animation, live class schedule and a free-trial form.</p>
+   <ul class="feats"><li>One-page website<span>TYPE</span></li><li>GSAP · Lenis · SplitText<span>MOTION</span></li><li>Schedule, pricing, form<span>FEATURES</span></li></ul><span class="tlink">Open live demo ↗</span></div>
+ </a>
+ <a class="proj" href="02-ristorante/" data-cur="Apri">
+  <span class="n">02 / 03</span>
+  <div class="shot"><img src="img/ristorante.jpg" alt="Il Portico restaurant website" loading="lazy"><span class="go">Open demo ↗</span></div>
+  <div><h3>Il Portico</h3><p>A cinematic site for a Piedmontese trattoria, in Italian: seasonal menu with hover previews, opening hours that know if you're open now, table booking.</p>
+   <ul class="feats"><li>Restaurant website<span>TYPE</span></li><li>Menu tabs, live hours, booking<span>FEATURES</span></li><li>Italian<span>LANGUAGE</span></li></ul><span class="tlink">Open live demo ↗</span></div>
+ </a>
+ <a class="proj" href="03-gestionale-ordini/?reset" data-cur="Try it">
+  <span class="n">03 / 03</span>
+  <div class="shot"><img src="img/ordini.jpg" alt="OrderDesk bakery order system" loading="lazy"><span class="go">Try the app ↗</span></div>
+  <div><h3>OrderDesk</h3><p>An order system for a bakery: customers order online, the owner gets an email and manages everything from a dashboard. The real version saves to Google Sheets and sends email from Gmail, with no monthly fees.</p>
+   <ul class="feats"><li>Web app<span>TYPE</span></li><li>Orders, statuses, CSV, chart<span>FEATURES</span></li><li>Google Apps Script<span>BACKEND</span></li></ul><span class="tlink">Try the app ↗</span></div>
+ </a>
+</section>
+
+<section class="svc" id="services">
+ <div class="sh"><h2 class="rv">What I<br>build</h2><p>Two kinds of projects, often together: the site people see, and the tools that run behind it.</p></div>
+ <div class="cols">
+  <div class="col"><span class="mono">01 · Websites</span><h3>Websites &amp; landing pages</h3><ul><li>One-page sites and sites up to 10 pages</li><li>Custom design, no templates</li><li>Contact, booking and quote forms to your inbox</li><li>Mobile-first, fast, basic SEO</li><li>Free hosting on your own account</li></ul><div class="price"><span>Starting at</span><b>$60</b></div></div>
+  <div class="col"><span class="mono">02 · Web apps</span><h3>Web apps &amp; automations</h3><ul><li>Order and booking systems with email alerts</li><li>Simple management tools: clients, orders, stock</li><li>Dashboards and reports from Google Sheets</li><li>Runs on free Google tools, no subscriptions</li><li>Short written guide, it's all yours</li></ul><div class="price"><span>Starting at</span><b>$50</b></div></div>
+ </div>
+</section>
+
+<section id="process">
+ <div class="sh"><h2 class="rv">How we<br>work</h2><p>Simple, written and fast. You always know the price before I start.</p></div>
+ <div class="steps">
+  <div class="step"><span class="mono">Step 01</span><h3>Tell me the idea</h3><p>A message is enough. I reply with questions and a fixed price.</p></div>
+  <div class="step"><span class="mono">Step 02</span><h3>First version</h3><p>A working preview link in a few days, not a static mock-up.</p></div>
+  <div class="step"><span class="mono">Step 03</span><h3>Revisions</h3><p>We adjust texts, colours and features together.</p></div>
+  <div class="step"><span class="mono">Step 04</span><h3>Go live</h3><p>Published on your accounts with a short guide. You own everything.</p></div>
+ </div>
+</section>
+
+<section class="cta" id="contact">
+ <span class="mono" style="color:var(--mute)">Have a project in mind?</span>
+ <h2 class="rv" style="margin-top:24px">Let's<br><span>build it.</span></h2>
+ <p>Send me a message on Fiverr with what you need. I reply within a day with a clear, fixed quote.</p>
+ <a class="pill" href="https://www.fiverr.com/albertogaglia" rel="noopener">Message me on Fiverr <span class="arr">↗</span></a>
+</section>
+</main>
+<footer class="mono"><span>© 2026 Alberto Gagliardi</span><span>Turin, Italy</span><span>Demo businesses are fictional · photos Unsplash</span></footer>
+<div class="cur" id="cur">Open</div>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/SplitText.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.3.26/dist/lenis.min.js"></script>
+<script>
+const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+// rotating word (works without GSAP too)
+const words=[...document.querySelectorAll('#rot span')];let wi=0;
+if(!reduced)setInterval(()=>{wi=(wi+1)%words.length;const y=-wi*100;words.forEach(w=>{w.style.transition='transform .7s cubic-bezier(.22,1,.36,1)';w.style.transform=`translateY(${y}%)`})},2200);
+// marquee content duplicated for a seamless loop
+const mq=document.getElementById('mq');mq.parentNode.appendChild(mq.cloneNode(true));
+
+if(window.gsap&&window.Lenis&&!reduced){
+ gsap.registerPlugin(ScrollTrigger,SplitText);
+ const lenis=new Lenis({lerp:.09});lenis.on('scroll',ScrollTrigger.update);gsap.ticker.add(t=>lenis.raf(t*1000));gsap.ticker.lagSmoothing(0);
+ document.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener('click',e=>{e.preventDefault();lenis.scrollTo(a.getAttribute('href')==='#top'?0:a.getAttribute('href'),{duration:1.5})}));
+
+ const sp=new SplitText('#h1',{type:'chars,words',mask:'chars'});
+ gsap.timeline({defaults:{ease:'expo.out'}}).from(sp.chars,{yPercent:110,duration:1.3,stagger:.018}).from('.hero .low>*',{y:24,opacity:0,stagger:.1,duration:1},'-=.9').from('nav',{opacity:0,duration:1},'-=1');
+
+ // marquee follows scroll velocity
+ const tracks=document.querySelectorAll('.mq .tr');let x=0,v=1;
+ lenis.on('scroll',e=>{v=1+Math.min(Math.abs(e.velocity)*.25,8)});
+ gsap.ticker.add(()=>{const w=tracks[0].offsetWidth;x=(x-v*0.6)%w;tracks.forEach(t=>t.style.transform=`translateX(${x}px)`);v+=(1-v)*.06});
+
+ document.querySelectorAll('.rv').forEach(h=>{const s=new SplitText(h,{type:'lines',mask:'lines'});gsap.from(s.lines,{yPercent:105,duration:1.2,stagger:.08,ease:'expo.out',scrollTrigger:{trigger:h,start:'top 85%'}})});
+ gsap.utils.toArray('.proj').forEach(p=>{
+  gsap.from(p.querySelector('.shot'),{clipPath:'inset(0 0 100% 0)',duration:1.5,ease:'expo.inOut',scrollTrigger:{trigger:p,start:'top 80%'}});
+  gsap.fromTo(p.querySelector('.shot img'),{scale:1.25},{scale:1,duration:1.8,ease:'expo.out',scrollTrigger:{trigger:p,start:'top 80%'}});
+  gsap.from(p.querySelectorAll('h3,p,.feats li,.tlink'),{y:24,opacity:0,stagger:.06,duration:1,ease:'expo.out',scrollTrigger:{trigger:p,start:'top 75%'}});
+ });
+ gsap.from('.col',{y:60,opacity:0,stagger:.12,duration:1.2,ease:'expo.out',scrollTrigger:{trigger:'.cols',start:'top 80%'}});
+ gsap.from('.step',{y:30,opacity:0,stagger:.1,duration:1,ease:'expo.out',scrollTrigger:{trigger:'.steps',start:'top 85%'}});
+ gsap.fromTo('.steps',{borderTopColor:'rgba(14,14,14,0)'},{borderTopColor:'rgba(14,14,14,1)',duration:1.2,scrollTrigger:{trigger:'.steps',start:'top 85%'}});
+ gsap.to('.svc',{borderRadius:0,ease:'none',scrollTrigger:{trigger:'.svc',start:'top bottom',end:'top top',scrub:true}});
+
+ // cursor label on projects
+ if(matchMedia('(hover:hover) and (pointer:fine)').matches){
+  const c=document.getElementById('cur'),qx=gsap.quickTo(c,'x',{duration:.45,ease:'power3'}),qy=gsap.quickTo(c,'y',{duration:.45,ease:'power3'});
+  addEventListener('pointermove',e=>{qx(e.clientX);qy(e.clientY)});
+  document.querySelectorAll('.proj .shot').forEach(s=>{
+   s.addEventListener('pointerenter',()=>{c.textContent=s.closest('.proj').dataset.cur;gsap.to(c,{scale:1,duration:.5,ease:'expo.out'})});
+   s.addEventListener('pointerleave',()=>gsap.to(c,{scale:0,duration:.35}));
+  });
+ }
+ addEventListener('load',()=>ScrollTrigger.refresh());
+}
+</script>
+</body>
+</html>
